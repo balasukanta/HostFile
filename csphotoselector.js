@@ -2,7 +2,7 @@
  * CS Photo Selector
  * @author: Carson Shold (@cshold)
 */
-var CSPhotoSelectorMug = (function(module, $) {
+var CSPhotoSelector = (function(module, $) {
 
 	// Public functions
 	var init, setAlbums, getAlbums, getAlbumById, getPhotoById, setPhotos, newInstance,
@@ -28,26 +28,26 @@ var CSPhotoSelectorMug = (function(module, $) {
 		settings = {
 			speed							: 100,
 			debug							: false,
-			disabledClass					: 'CSPhotoSelectorMug_disabled',
-			albumSelectedClass				: 'CSPhotoSelectorMug_photoSelected',
-			albumDisabledClass				: 'CSPhotoSelectorMug_photoDisabled',
-			photoFilteredClass				: 'CSPhotoSelectorMug_photoFiltered',
-			containerSelector				: '#CSPhotoSelectorMug',
+			disabledClass					: 'CSPhotoSelector_disabled',
+			albumSelectedClass				: 'CSPhotoSelector_photoSelected',
+			albumDisabledClass				: 'CSPhotoSelector_photoDisabled',
+			photoFilteredClass				: 'CSPhotoSelector_photoFiltered',
+			containerSelector				: '#CSPhotoSelector',
 			albumsContainerSelector			: '.CSAlbum_container',
 			photosContainerSelector			: '.CSPhoto_container',
-			photosWrapperSelector			: '.CSPhotoSelectorMug_wrapper',
-			selectedPhotoCountSelector		: '.CSPhotoSelectorMug_selectedPhotoCount',
-			selectedPhotoCountMaxSelector	: '.CSPhotoSelectorMug_selectedPhotoCountMax',
-			pageNumberSelector				: '#CSPhotoSelectorMug_pageNumber',
-			pageNumberTotalSelector			: '#CSPhotoSelectorMug_pageNumberTotal',
-			pagePrevSelector				: '#CSPhotoSelectorMug_pagePrev',
-			pageNextSelector				: '#CSPhotoSelectorMug_pageNext',
-			buttonBackToAlbumsSelector		: '#CSPhotoSelectorMug_backToAlbums',
-			buttonCloseSelector				: '#CSPhotoSelectorMug_buttonClose',
-			buttonOKSelector				: '#CSPhotoSelectorMug_buttonOK',
-			buttonCancelSelector			: '#CSPhotoSelectorMug_buttonCancel',
-			loader							: '#CSPhotoSelectorMug_loader',
-			pagination						: '.CSPhotoSelectorMug_pageNumberContainer, #CSPhotoSelectorMug_pagePrev, #CSPhotoSelectorMug_pageNext'
+			photosWrapperSelector			: '.CSPhotoSelector_wrapper',
+			selectedPhotoCountSelector		: '.CSPhotoSelector_selectedPhotoCount',
+			selectedPhotoCountMaxSelector	: '.CSPhotoSelector_selectedPhotoCountMax',
+			pageNumberSelector				: '#CSPhotoSelector_pageNumber',
+			pageNumberTotalSelector			: '#CSPhotoSelector_pageNumberTotal',
+			pagePrevSelector				: '#CSPhotoSelector_pagePrev',
+			pageNextSelector				: '#CSPhotoSelector_pageNext',
+			buttonBackToAlbumsSelector		: '#CSPhotoSelector_backToAlbums',
+			buttonCloseSelector				: '#CSPhotoSelector_buttonClose',
+			buttonOKSelector				: '#CSPhotoSelector_buttonOK',
+			buttonCancelSelector			: '#CSPhotoSelector_buttonCancel',
+			loader							: '#CSPhotoSelector_loader',
+			pagination						: '.CSPhotoSelector_pageNumberContainer, #CSPhotoSelector_pagePrev, #CSPhotoSelector_pageNext'
 		};
 
 		// Override defaults with arguments
@@ -147,7 +147,7 @@ var CSPhotoSelectorMug = (function(module, $) {
 		bindEvents, unbindEvents, updateAlbumContainer, updatePhotosContainer, updatePaginationButtons, selectAlbum, selectPhotos;
 
 		if (!settings) {
-			log('Cannot create a new instance of CSPhotoSelectorMug because the plugin not initialised.');
+			log('Cannot create a new instance of CSPhotoSelector because the plugin not initialised.');
 			return false;
 		}
 
@@ -177,7 +177,7 @@ var CSPhotoSelectorMug = (function(module, $) {
 		 */
 		showAlbumSelector = function(id, callback) {
 			var i, len;
-			log('CSPhotoSelectorMug - show Albums');
+			log('CSPhotoSelector - show Albums');
 			if (!$albums) {
 				return buildAlbumSelector(id, function() {
 					showAlbumSelector(id, callback);
@@ -206,7 +206,7 @@ var CSPhotoSelectorMug = (function(module, $) {
 
 		showPhotoSelector = function(callback, albumId) {
 			var i, len;
-			log('CSPhotoSelectorMug - show Photos');
+			log('CSPhotoSelector - show Photos');
 
 			// show loader until we get a response
 			$loader.show();
@@ -410,10 +410,10 @@ var CSPhotoSelectorMug = (function(module, $) {
 						selectedAlbumIds.push(albumId);
 						$album.addClass(settings.albumSelectedClass);
 						$selectedCount.html(selectedAlbumIds.length);
-						log('CSPhotoSelectorMug - newInstance - selectAlbum - selected IDs: ', selectedAlbumIds);
+						log('CSPhotoSelector - newInstance - selectAlbum - selected IDs: ', selectedAlbumIds);
 						if (typeof instanceSettings.callbackAlbumSelected === "function") { instanceSettings.callbackAlbumSelected(albumId)}
 					} else {
-						log('CSPhotoSelectorMug - newInstance - selectAlbum - ID already stored');
+						log('CSPhotoSelector - newInstance - selectAlbum - ID already stored');
 					}
 				}
 
@@ -457,10 +457,10 @@ var CSPhotoSelectorMug = (function(module, $) {
 						selectedPhotoIds.push(photoId);
 						$photo.addClass(settings.albumSelectedClass);
 						$selectedCount.html(selectedPhotoIds.length);
-						log('CSPhotoSelectorMug - newInstance - selectPhoto - selected IDs: ', selectedPhotoIds);
+						log('CSPhotoSelector - newInstance - selectPhoto - selected IDs: ', selectedPhotoIds);
 						if (typeof instanceSettings.callbackPhotoSelected === "function") { instanceSettings.callbackPhotoSelected(photoId, selectedPhotoIds.length); }
 					} else {
-						log('CSPhotoSelectorMug - newInstance - selectPhoto - ID already stored');
+						log('CSPhotoSelector - newInstance - selectPhoto - ID already stored');
 					}
 				}
 
@@ -550,12 +550,12 @@ var CSPhotoSelectorMug = (function(module, $) {
 						if (typeof callback === 'function') { callback(); }
 					} else {
 						alert ('Sorry, your friend won\'t let us look through their photos');
-						log('CSPhotoSelectorMug - buildAlbumSelector - No albums returned');
+						log('CSPhotoSelector - buildAlbumSelector - No albums returned');
 						return false;
 					}
 				});
 			} else {
-				log('CSPhotoSelectorMug - buildAlbumSelector - User is not logged in to Facebook');
+				log('CSPhotoSelector - buildAlbumSelector - User is not logged in to Facebook');
 				return false;
 			}
 		});
@@ -572,11 +572,11 @@ var CSPhotoSelectorMug = (function(module, $) {
 
 		// Return the markup for a single album
 		buildAlbumMarkup = function(album, accessToken) {
-			return '<a href="#" class="CSPhotoSelectorMug_album" data-id="' + album.id + '">' +
-					'<div class="CSPhotoSelectorMug_albumWrap"><div>' +
-					'<img src="https://graph.facebook.com/'+ album.id +'/picture?type=album&access_token='+ accessToken +'" alt="' + htmlEntities(album.name) + '" class="CSPhotoSelectorMug_photoAvatar" />' +
+			return '<a href="#" class="CSPhotoSelector_album" data-id="' + album.id + '">' +
+					'<div class="CSPhotoSelector_albumWrap"><div>' +
+					'<img src="https://graph.facebook.com/'+ album.id +'/picture?type=album&access_token='+ accessToken +'" alt="' + htmlEntities(album.name) + '" class="CSPhotoSelector_photoAvatar" />' +
 					'</div></div>' +
-					'<div class="CSPhotoSelectorMug_photoName">' + htmlEntities(album.name) + '</div>' +
+					'<div class="CSPhotoSelector_photoName">' + htmlEntities(album.name) + '</div>' +
 					'</a>';
 		};
 	};
@@ -605,7 +605,7 @@ var CSPhotoSelectorMug = (function(module, $) {
 					$photosWrapper.addClass('CSPhoto_container_active');
 				}
 			} else {
-				log('CSPhotoSelectorMug - showPhotoSelector - No photos returned');
+				log('CSPhotoSelector - showPhotoSelector - No photos returned');
 				return false;
 			}
 		});
@@ -627,8 +627,8 @@ var CSPhotoSelectorMug = (function(module, $) {
 		};
 
 		buildPhotoMarkup = function(photo) {
-			return '<a href="#" class="CSPhotoSelectorMug_photo CSPhotoSelectorMug_clearfix" data-id="' + photo.id + '">' +
-					'<span><img src="' + photo.picture + '" alt="" class="CSPhotoSelectorMug_photoAvatar" /></span>' +
+			return '<a href="#" class="CSPhotoSelector_photo CSPhotoSelector_clearfix" data-id="' + photo.id + '">' +
+					'<span><img src="' + photo.picture + '" alt="" class="CSPhotoSelector_photoAvatar" /></span>' +
 					'</a>';
 		};
 	};
@@ -664,4 +664,4 @@ var CSPhotoSelectorMug = (function(module, $) {
 	};
 	return module;
 
-}(CSPhotoSelectorMug || {}, jQuery));
+}(CSPhotoSelector || {}, jQuery));
